@@ -9,7 +9,7 @@
 #include "./inc/gray.h"                     // 灰度传感器相关函数
 
 // 自定义变量
-int flag = 0;                               // 状态标志（检测到达哪一条黑线）
+int lineFlag = 0;                               // 状态标志（检测到达哪一条黑线）
 
 // 创建舵机对象
 ServoTimer2 servo1;                         // 夹爪舵机
