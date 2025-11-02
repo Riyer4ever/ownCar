@@ -49,7 +49,7 @@ void setup()
     delay(0);                               // 等待抬起完成
 
     Timer1.initialize(50000);               // 初始化定时器，设置周期为50ms
-    Timer1.attachInterrupt(grayDetect_ISR);     // 设置定时器中断，50ms检测一次灰度传感器
+    Timer1.attachInterrupt(grayDetect_ISR); // 设置定时器中断，50ms检测一次灰度传感器
 
     Serial.begin(9600);                     // 初始化串口，设置波特率为9600
 }
