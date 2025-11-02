@@ -1,3 +1,4 @@
+#include <Arduino.h>
 // 停止所有电机
 void stop()
 {
