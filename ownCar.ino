@@ -6,6 +6,9 @@
 #include <avr/power.h>
 #endif
 
+// 自定义函数头文件
+#include "move.h"
+
 // 创建舵机对象
 ServoTimer2 servo1;                         // 夹爪舵机
 ServoTimer2 servo2;                         // 抬臂舵机
@@ -30,18 +33,18 @@ void setup()
     servo3.attach(11);                      // 旋转舵机
 
     // 初始化舵机位置
-    servo1.write(1540);                     // 旋转舵机
-    servo2.write(1400);                     // 抬臂舵机
-    servo3.write(1700);                     // 夹爪舵机
-    delay(800);
+    servo1.write(0);                     // 旋转舵机
+    servo2.write(0);                     // 抬臂舵机
+    servo3.write(0);                     // 夹爪舵机
+    delay(0);
 
     // 夹取物块
-    servo3.write(0);                         // 机械臂旋转到合适位置
-    servo2.write(0);                         // 放下机械臂
-    servo1.write(0);                         // 夹取物块
-    delay(800);                             // 等待夹取完成
-    servo2.write(0);                         // 抬起机械臂
-    delay(800);                             // 等待抬起完成
+    servo3.write(0);                        // 机械臂旋转到合适位置
+    servo2.write(0);                        // 放下机械臂
+    servo1.write(0);                        // 夹取物块
+    delay(0);                             // 等待夹取完成
+    servo2.write(0);                        // 抬起机械臂
+    delay(0);                             // 等待抬起完成
 }
 
 void loop()
