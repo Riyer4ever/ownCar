@@ -1,5 +1,5 @@
 {
     "board": "arduino:avr:uno",
-    "programmer": "arduino:avrisp",
+    "programmer": "avrispmkii",
     "sketch": "ownCar.ino"
 }
