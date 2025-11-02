@@ -9,7 +9,7 @@ void stop()
     analogWrite(10, 0);
 }
 
-// 全速起步;投掷后全速前进;
+// 全速起步；全速过大坑;
 void forward()
 {
     analogWrite(6, 255);                    // 右侧电机顺时针旋转（向前）

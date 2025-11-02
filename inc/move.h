@@ -7,3 +7,5 @@ void forward();
 void turnLeft();
 void turnRight();
 void tunnelTurnLeft();
+void upHill();
+void downHill();
