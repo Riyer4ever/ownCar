@@ -2,4 +2,4 @@
 #define GRAY_H
 #endif
 
-void grayDetect();
+void grayDetect_ISR();

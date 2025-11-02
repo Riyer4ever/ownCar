@@ -16,10 +16,24 @@ void forward()
     analogWrite(9, 255);                    // 左侧电机逆时针旋转（向前）
 }
 
+// 上坡
+void upHill()
+{
+    analogWrite(6, 255);                    // 右侧电机顺时针旋转（向前）
+    analogWrite(9, 150);                    // 左侧电机逆时针旋转（向前），因为结构问题，左侧电机需要稍微慢一点才能保持上坡直线前进
+}
+
+// 缓慢下坡
+void downHill()
+{
+    analogWrite(6, 180);                    // 右侧电机顺时针旋转（向前）
+    analogWrite(9, 120);                    // 左侧电机逆时针旋转（向前）
+}
+
 // 正常左转
 void turnLeft()
 {
-    analogWrite(6, 120);                    // 右侧电机较高速顺时针旋转（向前）
+    analogWrite(6, 120);                    // 右侧电机顺时针旋转（向前）
     analogWrite(9, 255);                    // 左侧电机逆时针旋转（向前）
 }
 
@@ -27,7 +41,7 @@ void turnLeft()
 void turnRight()
 {
     analogWrite(6, 255);                    // 右侧电机顺时针旋转（向前）
-    analogWrite(9, 120);                    // 左侧电机较高速逆时针旋转（向前）
+    analogWrite(9, 120);                    // 左侧电机逆时针旋转（向前）
 }
 
 //隧道左转（隧道里弯道更大，所以转弯的幅度要更大）
