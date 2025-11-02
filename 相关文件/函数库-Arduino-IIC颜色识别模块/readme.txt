@@ -1,0 +1,2 @@
+本函数库经Arduino 2.3.6编译测试通过，建议使用不低于2.3.6版本的Arduino IDE。无法兼容Arduino1.8以下版本，敬请注意。
+建议使用高版本Arduino IDE自带的“项目→导入库→添加zip库”功能导入MH_TCS34725.zip文件。对于Adafruit_GFX库，可在“工具→管理库”里面搜索安装最新版本。尽量不要直接复制粘贴至Arduino/libraries文件夹。
