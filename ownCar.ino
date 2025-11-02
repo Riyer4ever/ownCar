@@ -77,12 +77,12 @@ void loop()
         stop();                             // 停止
         delay(500);                         // 延时500ms，稳定
         interrupts();                       // 开启中断，继续灰度检测
-        delay(0);                            //停车位到标准色卡位置的延时
+        delay(0);                           //停车位到标准色卡位置的延时
         colorFlag = colorDetect(0);         // 颜色检测函数，返回颜色标志
         
 
         // 检测第一色卡
-        delay(0);                            // 标准色卡到后方第一色卡位置的延时
+        delay(0);                           // 标准色卡到后方第一色卡位置的延时
         colorCompare = colorDetect(0);      // 颜色检测函数，返回颜色标志
         if (colorFlag == colorCompare)
         {
@@ -165,20 +165,20 @@ void loop()
     // 检测到第三条黑线，准备过大坑
     else if (lineFlag == 3)
     {
-        delay(0);                        // 行进到大坑边缘的延时
-        noInterrupts();                 // 关闭中断，执行过大坑动作
-        forward();                      // 全速过大坑
-        delay(0);                       // 延时，完成过大坑
-        interrupts();                   // 开启中断，继续灰度检测
-        delay(0);                       // 延时，出大坑后循迹
-        noInterrupts();                 // 到达终点关闭中断，执行停止动作
-        stop();                         // 停止
+        delay(0);                           // 行进到大坑边缘的延时
+        noInterrupts();                     // 关闭中断，执行过大坑动作
+        forward();                          // 全速过大坑
+        delay(0);                           // 延时，完成过大坑
+        interrupts();                       // 开启中断，继续灰度检测
+        delay(0);                           // 延时，出大坑后循迹
+        noInterrupts();                     // 到达终点关闭中断，执行停止动作
+        stop();                             // 停止
     }
 
     else
     {
-        noInterrupts();                 // 关闭中断
-        stop();                         // 其他情况停止不动
+        noInterrupts();                     // 关闭中断
+        stop();                             // 其他情况停止不动
     }
 
 }
