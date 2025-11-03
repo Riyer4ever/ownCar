@@ -35,23 +35,24 @@ void setup()
     servo3.attach(11);                      // 旋转舵机
 
     // 初始化舵机位置
-    servo1.write(0);                        // 旋转舵机初始化
-    servo2.write(0);                        // 抬臂舵机初始化
-    servo3.write(0);                        // 夹爪舵机初始化
+    servo1.write(1400);                     // 旋转舵机初始化
+    servo2.write(1400);                     // 抬臂舵机初始化
+    servo3.write(1400);                     // 夹爪舵机初始化
     delay(500);
 
     // 初始夹取
-    servo3.write(0);                        // 机械臂旋转到合适位置
-    servo2.write(0);                        // 放下机械臂
-    servo1.write(0);                        // 夹取物块
-    delay(0);                               // 等待夹取完成
-    servo2.write(0);                        // 抬起机械臂
-    delay(0);                               // 等待抬起完成
+    servo3.write(1100);                     // 机械臂旋转到合适位置
+    servo2.write(1200);                     // 放下机械臂
+    servo1.write(2200);                     // 夹取物块
+    delay(1000);                            // 等待夹取完成
+    servo2.write(1400);                     // 抬起机械臂
+    delay(1000);                            // 等待抬起完成
 
     Timer1.initialize(50000);               // 初始化定时器，设置周期为50ms
-    Timer1.attachInterrupt(grayDetect_ISR); // 设置定时器中断，50ms检测一次灰度传感器
+    Timer1.attachInterrupt(grayDetect_ISR); // 设置定时器中断，50ms检测一次灰度传感器[
 
     Serial.begin(9600);                     // 初始化串口，设置波特率为9600
+    interrupts();
 }
 
 void loop()
@@ -66,11 +67,18 @@ void loop()
         delay(500);                         // 延时500ms，稳定
         downHill();                         // 缓慢下坡
         delay(1500);                        // 延时2000ms，完成下坡
+        linFlag++;                          // 更新状态标志，进入隧道阶段
+        interrupts();                       // 开启中断，继续灰度检测
+    }
+    
+    // 下坡进入隧道，开始隧道左转
+    else if (linFlag == 2)
+    {
         interrupts();                       // 开启中断，继续灰度检测
     }
 
     // 完成隧道后，检测到第二条黑线，进行色卡检测（不停车检测色卡）
-    else if (lineFlag == 2)
+    else if (lineFlag == 3)
     {
         // 检测标准色卡
         noInterrupts();                     // 关闭中断，执行色卡检测动作
@@ -163,7 +171,7 @@ void loop()
     }
 
     // 检测到第三条黑线，准备过大坑
-    else if (lineFlag == 3)
+    else if (lineFlag == 4)
     {
         delay(0);                           // 行进到大坑边缘的延时
         noInterrupts();                     // 关闭中断，执行过大坑动作
