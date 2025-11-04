@@ -6,6 +6,7 @@ void stop();
 void forward();
 void turnLeft();
 void turnRight();
-void tunnelTurnLeft();
 void upHill();
 void downHill();
+void turnLeftPower();
+void turnRightPower();

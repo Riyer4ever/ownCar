@@ -25,23 +25,25 @@ void grayDetect_ISR()
     }
     
     // 右侧检测到黑线，左侧未检测到，右转
-    else if (rightGray < 400 && leftGray > 400 && lineFlag != 1)
+    else if (rightGray < 400 && leftGray > 400 && lineFlag == 0)
     {
         turnRight();
-        delay(2000);
     }
 
     // 左侧检测到黑线，右侧未检测到，左转
-    else if (rightGray > 400 && leftGray < 400 && lineFlag != 1)
+    else if (rightGray > 400 && leftGray < 400 && lineFlag == 0)
     {
         turnLeft();
-        delay(2000);
     }
-    
-    // flag == 1，过坡完成，开始进入，使用隧道左转函数左转
-    else if (rightGray > 400 && leftGray < 400 && lineFlag == 1)
+
+    else if (rightGray < 400 && leftGray > 400 && lineFlag != 0)
     {
-        tunnelTurnLeft();
+        turnRightPower();
+    }
+
+    else if (rightGray > 400 && leftGray < 400 && lineFlag != 0)
+    {
+        turnLeftPower();
     }
 
     // 两侧均检测到黑线，更新状态标志

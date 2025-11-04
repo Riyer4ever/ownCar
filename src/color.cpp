@@ -1,11 +1,12 @@
 #include "MH_TCS34725.h"                    // 颜色传感器库 
 
 //设置颜色传感器采样周期50毫秒
-MH_TCS34725 tcs = MH_TCS34725(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_4X);
+
 
 // 颜色检测函数，返回颜色标志；1-红色，2-绿色，3-蓝色，0-未知颜色，delayTime-延时参数，单位毫秒，用于不停车检测中避免数据冲突
 int colorDetect(int delayTime)
 {
+    MH_TCS34725 tcs = MH_TCS34725(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_4X);
     uint16_t r, g, b, c;                    // 颜色传感器的原始数据变量
     uint8_t R, G, B;                        // 颜色传感器处理后的数据变量
     int color = 0;                          // 默认颜色未知
