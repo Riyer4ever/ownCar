@@ -50,7 +50,7 @@ void setup()
     servo2.write(20);                       // 抬起机械臂
     delay(1000);                            // 等待抬起完成
 
-    Timer1.initialize(200000);              // 初始化定时器，设置周期为50ms
+    Timer1.initialize(200000);              // 初始化定时器，设置周期为200ms
     Timer1.attachInterrupt(grayDetect_ISR); // 设置定时器中断，50ms检测一次灰度传感器
     interrupts();                           // 开启中断
 
@@ -66,24 +66,25 @@ void loop()
         Timer1.detachInterrupt();           // 关闭定时器中断，防止干扰
         servo2.write(20);                   // 抬起机械臂
         upHill();                           // 上坡
+        delay(700);
         turnLeft();                         // 左转补偿
-        delay(300);
+        delay(100);
         upHill();                           // 上坡函数
-        delay(1600);                        // 延时3400ms，完成上坡
+        delay(900);                        // 延时3400ms，完成上坡
         stop();                             // 停止
         delay(200);                         // 延时500ms，稳定
         downHill();                         // 下坡
-        delay(900);                         // 延时2000ms，完成下坡
+        delay(800);                         // 延时2000ms，完成下坡
+        Timer1.attachInterrupt(grayDetect_ISR); // 重新开启定时器中断
         lineFlag++;                         // 更新状态标志，进入隧道阶段
         servo2.write(1500);                 // 放下机械臂，防止碰撞隧道
-        Timer1.attachInterrupt(grayDetect_ISR); // 重新开启定时器中断
     }
     else if (lineFlag == 0)
     {
-        noInterrupts();                     // 关闭中断，执行过坡前的循迹动作
+        Timer1.detachInterrupt();
         delay(800);
-        interrupts();                       // 开启中断，继续灰度检测
-        interrupts();                       // 开启中断，继续灰度检测
+        Timer1.attachInterrupt(grayDetect_ISR);
+\
     }
 
     
@@ -98,14 +99,15 @@ void loop()
     {
         // 检测标准色卡
         delay(200);                         //停车位到标准色卡位置的延时
-        Timer1.detachInterrupt();
         colorFlag = colorDetect(0);         // 颜色检测函数，返回颜色标志
-        stop();
         return;
 
         // 检测第一色卡
         delay(400);                         // 标准色卡到后方第一色卡位置的延时
         colorCompare = colorDetect(0);      // 颜色检测函数，返回颜色标志
+        Timer1.detachInterrupt();           
+        stop();
+        return;
 
         if (colorFlag == colorCompare)
         {
